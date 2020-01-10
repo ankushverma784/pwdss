@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Employee.Models.EmpModel>
+
+@{
+    ViewBag.Title = "EmpList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ds = (System.Data.DataSet)ViewBag.EmpTable;
+}
+
+<h2>EmpList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpDeg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpAge)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (System.Data.DataRow dr in ds.Tables["EmpModel"].Rows)
+    {
+        <tr>
+            <td>
+                @dr["EmpId"].ToString()
+            </td>
+            <td>
+                @dr["EmpName"].ToString()
+            </td>
+            <td>
+                @dr["EmpDeg"].ToString()
+            </td>
+            <td>
+                @dr["EmpCode"].ToString()
+            </td>
+            <td>
+                @dr["EmpAge"].ToString()
+            </td>
+            <td>
+                
+                @Html.ActionLink("Edit", "Edit", new { id =  @dr["EmpId"] }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = @dr["EmpId"] }, new { @class = "btn btn-danger   " })
+            </td>
+
+        </tr>
+    }
+
+</table>
